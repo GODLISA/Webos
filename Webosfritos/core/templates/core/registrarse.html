@@ -2,63 +2,25 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div>
-        <div class="card-header" style="width: 100%;">
-            <h2>Registrate</h2>
-        </div>
-
-        <div class="container">
-            <div class="contenedorxs">
-                <div class="form__top">
-                    <h2><span>Registrarse</span></h2>
-                </div>
-                <form class="form__reg" action="{% url "registrarUser" %}" method="post">
-                    {% csrf_token %}
-                    <input class="input"
-                            type="text"
-                            placeholder="Nombre de usuario"
-                            required
-                            autofocus
-                            name="nombre">
-        
-                    <input class="input"
-                            type="text"
-                            placeholder="Nombre"
-                            required
-                            autofocus
-                            name="primernombre">
-        
-                    <input class="input"
-                            type="text"
-                            placeholder="Apellido"
-                            required
-                            autofocus
-                            name="segundonombre">
-        
-                    <input class="input"
-                            type="email"
-                            placeholder="Email"
-                            required
-                            name="email">
-        
-                    <input class="input"
-                            type="password"
-                            placeholder="Contraseña"
-                            required
-                            name="contraseña">
-        
-                    <input class="input"
-                            type="password"
-                            placeholder="Ingrese otra vez la contraseña"
-                            required>
-        
-                    <div class="btn__form">
-                        <input class="btn__submit" type="submit" value="REGISTRAR">
-                        <input class="btn__reset" type="reset" value="LIMPIAR">
-                    </div>
-        
-                </form>
+<link rel="stylesheet" href="{% static 'core/css/style2.css' %}">
+<div class="contenedorxs">
+    <section class="form-register">
+        <img style="width: 150px; display: block; margin: 20px auto;" src="{% static 'core/imagenes/icono.png' %}" alt="">
+        <h4>Registrate</h4>
+        <form class="form__reg" action="{% url "registrarUser" %}" method="post">
+            {% csrf_token %}
+            <input class="input controls" type="text" placeholder="Nombre de usuario" required autofocus name="nombre">
+            <input class="input controls" type="text" placeholder="Nombre" required autofocus name="primernombre">
+            <input class="input controls" type="text" placeholder="Apellido" required autofocus name="segundonombre">
+            <input class="input controls" type="email" placeholder="Email" required name="email">
+            <input class="input controls" type="password" placeholder="Contraseña" required name="contraseña">
+            <input class="input controls" type="password" placeholder="Ingrese otra vez la contraseña" required>
+            <div>
+                <input class="btn_submit botons" type="submit" value="REGISTRARSE">
+                <input class="btn_reset botons" type="reset" value="LIMPIAR">
             </div>
-        </div>
-    </div>
+            <p><a href="{% url 'mostrarInicio' %}" >¿Ya estas registrado?</a></p>
+        </form>
+    </section>
+</div>
 {% endblock content %}
