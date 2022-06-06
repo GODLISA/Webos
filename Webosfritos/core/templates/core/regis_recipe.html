@@ -3,11 +3,15 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div>
+        <link rel="stylesheet" href="{% static 'core/css/style2.css' %}">
+        <section class="form-register">
         <div class="card-header" style="width: 100%;">
-            <h2>Crea tu maravillosa receta!</h2>
+            <p class="centrado">Comparte tu maravillosa receta!</p>
         </div>
         <div>
+              <div>
             <p style="color:aliceblue">{{ error }}</p>
+            <p style="color:rgb(3, 134, 248)">{{ error }}</p><div>
         </div>
         <div class="container">
             <form class="form__reg" action="{% url "crear" %}" method="post">
@@ -21,14 +25,19 @@
                         placeholder="Imagen"
                         required
                         name="imagen">
-                <input type="text" placeholder="Describe tu receta" name="receta">
+
+                        <input type="text" placeholder="Describe tu receta" name="receta">
     
-                <a href="#" style="font-size:80%;">¿Has olvidado tu contraseña?</a>
+                <a href="#" style="font-size:80%;">
     
                 <div class="btn__form">
-                    <input class="btn__submit" type="submit" value="Crear">
-                    <input class="btn__reset" type="reset" value="Borrar Formulario">
+                    <input class="btn__submit botons" type="submit" value="Crear">
+                    
+
                 </div>
+
+            
+               
     
             </form>
         </div>
