@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div>
+        <div class="card-header" style="width: 100%;">
+            <h2>Inicia Sesion</h2>
+        </div>
+
+        <div class="container">
+            <div class="contenedorxs">
+                <div class="form__top">
+                    <h2><span>Iniciar Sesion</span></h2>
+                </div>
+                <form class="form__reg" action="{% url "iniciarSesion" %}" method="post">
+                    {% csrf_token %}
+                    <input class="input"
+                            type="text"
+                            placeholder="Nombre o Email"
+                            required autofocus
+                            name="username">
+                    <input class="input"
+                            type="password"
+                            placeholder="Contraseña"
+                            required
+                            name="password">
+        
+                    <a href="#" style="font-size:80%;">¿Has olvidado tu contraseña?</a>
+        
+                    <div class="btn__form">
+                        <input class="btn__submit" type="submit" value="INICIAR SESION">
+                        <input class="btn__reset" type="reset" value="LIMPIAR">
+                    </div>
+        
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

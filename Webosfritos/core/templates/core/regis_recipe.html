@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div>
+        <div class="card-header" style="width: 100%;">
+            <h2>Crea tu maravillosa receta!</h2>
+        </div>
+        <div>
+            <p style="color:aliceblue">{{ error }}</p>
+        </div>
+        <div class="container">
+            <form class="form__reg" action="{% url "crear" %}" method="post">
+                {% csrf_token %}
+                <input class="input"
+                        type="text"
+
+                        required autofocus
+                        name="titulo">
+                <input class="input"
+                        type="file"
+                        placeholder="Imagen"
+                        required
+                        name="imagen">
+                <input type="text" placeholder="Describe tu receta" name="receta">
+    
+                <a href="#" style="font-size:80%;">¿Has olvidado tu contraseña?</a>
+    
+                <div class="btn__form">
+                    <input class="btn__submit" type="submit" value="Crear">
+                    <input class="btn__reset" type="reset" value="Borrar Formulario">
+                </div>
+    
+            </form>
+        </div>
+    </div>
+{% endblock content %}

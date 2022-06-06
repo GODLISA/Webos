@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <p>Estimado {{user}}, estas son tus recetas</p>
+
+    <div class="container">
+        {% for object in recetas %}
+        <div class="" style="color:white">
+            <div class="">
+                <h5 class="card-title">{{ object.title }}</h5>
+                <p class="card-text">{{ object.parrafo }}</p>
+
+            </div>
+            <img src="{{ object.imagen.url }}" alt="">
+        </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

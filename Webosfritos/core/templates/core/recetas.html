@@ -1,0 +1,26 @@
+{% extends 'core/plantillareceta.html' %}
+{% load static %}
+
+{% block title%}
+<title>{{ idreceta }}</title>
+{% endblock title%}
+
+{% block titulo %}
+<h1>{{ titulo }}</h1>
+{% endblock titulo%}
+
+{% block imagen %}
+<div class="col-md-4 col-sm-12 centrado">
+    <img src="{{ imagen }}" alt="">
+</div>
+{% endblock imagen %}
+<div class="col-md-4 col-sm-12 ">
+    {% block parrafo %}
+    <p>{{ parrafo }}</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam reiciendis rerum recusandae nihil ipsa cumque at
+        magni, cum amet nostrum quidem consectetur sunt, ab ad, quas odio aliquam quis ex.</p>
+    {% endblock parrafo%}
+</div>
+<div class="col-md-4 col-sm-12">
+    &nbsp;
+</div>
