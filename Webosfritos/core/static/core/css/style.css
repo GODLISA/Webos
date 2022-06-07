@@ -245,3 +245,11 @@ button {
     width: 100%;
     max-width: 300px;
 }
+
+.ul p{
+    font-size: 150px;
+}
+
+.ul img{
+    margin-top: 14%;
+}

@@ -21,7 +21,7 @@ class Receta(models.Model):
     titulo = models.CharField(max_length=20, null=False, verbose_name='Titulo de la receta')
     imagen = models.ImageField(upload_to='recetas', null= True)
     parrafo = models.CharField(max_length=1200, null=False, verbose_name='Descripcion de la receta')
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return '{} - {}'.format(self.titulo, self.usuario)
