@@ -14,6 +14,7 @@
 
             </div>
             <img src="{{ object.get_imagen_url }}"  width="500px"  alt="">
+            <a class="btn btn-sm btn-info" href="{% url 'updateReceta' %}">Editar</a>
         </div>
         {% endfor %}
     </div>

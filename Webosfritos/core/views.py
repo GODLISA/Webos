@@ -1,12 +1,18 @@
+from dataclasses import field
+from pdb import post_mortem
 from pickletools import read_uint1
 import re
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import views as auth_login
-from .models import Receta
-from .forms import UserRegisterForm
+from .models import Receta, Usuario
+from .forms import UserRegisterForm, RecipeFormClass
 from django.contrib import messages
 from Webosfritos.settings import BASE_DIR
+from django.views.generic import (UpdateView)
+from django import forms
+
+
 # Create your views here.
 def index(request):
     return render(request, 'core/index.html')
@@ -68,3 +74,17 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'core/registrarse.html', {'form': form})
+
+def updateReceta(request):
+    if request.method == 'POST':
+        titulo = Receta.objects.get('titulo')
+        imagen = Receta.objects.get('imagen') 
+        receta = Receta.objects.get('parrafo')
+        user = request.user
+        objeto = User.objects.get(pk=user.id)
+        form = RecipeFormClass(instance=objeto)
+        context={'titulo':titulo,'imagen':imagen,'receta': receta}
+        if form.is_valid():
+            form.save()
+            return redirect('mis_recetas')
+    return render(request, 'core/regis_recipe.html', contexto=context)

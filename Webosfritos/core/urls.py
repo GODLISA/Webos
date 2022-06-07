@@ -17,6 +17,7 @@ urlpatterns = [
     path('crear_receta/', views.recetas_view, name='crear_receta'),
     path('crear_receta/go', views.crearReceta, name='crear'),
     path('mis_recetas/', views.mostrar_mis_recetas, name='mis_recetas'),
+    path('updateReceta/', views.updateReceta, name='updateReceta'),
 
     # logout
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
