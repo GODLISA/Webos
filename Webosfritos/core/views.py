@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login as auth_login
 from .models import Receta
+from media import recetas
 
 # Create your views here.
 def index(request):
@@ -30,7 +31,6 @@ def crearReceta(request):
     except:
         context = {'error': 'No se pudo crear receta, debes tener tu sesion iniciada'}
         return render(request, 'core/regis_recipe.html', context=context)
-
 def mostrar_mis_recetas(request):
 
     user = request.user
@@ -43,13 +43,13 @@ def mostrar_mis_recetas(request):
 
     if user is None:
         user = 'Guest'
+        return redirect('iniciarsesion')
 
     context = {
         'recetas': recetas,
         'user': user
     }
     return render(request, 'core/mis_recetas.html', context=context)
-
 def registrarUser(request):
     # DATOS TOMADOS ATRAVES DEL FORMULARIO
     nombre = request.POST.get('nombre','')

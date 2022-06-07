@@ -7,7 +7,7 @@
     <section class="form-register">
         <img style="width: 150px; display: block; margin: 20px auto;" src="{% static 'core/imagenes/icono.png' %}" alt="">
         <h4>Iniciar Sesion</h4>
-        <form class="form__reg" action="{% url "iniciarSesion" %}" method="post">
+        <form class="form__reg" action="{% url 'iniciarSesion' %}" method="post">
             {% csrf_token %}
             <input class="controls" type="text" placeholder="Nombre o Email" required autofocus name="username">
             <input class="controls" type="password" placeholder="Contraseña" required name="password">
