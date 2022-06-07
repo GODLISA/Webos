@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'core/css/argon-css.css' %}">
+
 </head>
 <body>
     <header>
@@ -40,7 +41,7 @@
               {% if user.is_authenticated %}
 
                 <div class="alert alert-success" role="alert">
-                    <strong>Bienvenido!   </strong> {{ user }}.
+                    <strong>Bienvenido!</strong> {{ user }}.
                 </div>
                     
             {% endif %}
@@ -55,11 +56,13 @@
     </header>
    
 
-    
+    <div class="row">
         <div class="col-md-12">
         {% block content %}{% endblock %}
         </div>
         
+        </div>
+    </div>
      
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/post.css' %}">
+    <p class="mr-2">Estimado {{user}}, estas son tus recetas</p>
+    <div class="container">
+        <div class="col-md-12 col-lg-12">
+            {% for post in recetas %}
+                <article class="post vt-post">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                            <div class="post-type post-img">
+                                <h2 style="color: rgb(102, 102, 102); margin: 1rem;">{{ post.usuario.username }}</p>
+                                <img style="padding: auto; margin: 10px;" class="article-img" width="300" src="{{ post.imagen.url }}">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8" >
+                            <div class="caption">
+                                <h2 class="md-heading"><a class="article-title" href="{% url 'post-detail' post.pk %}">{{ post.titulo }}</a></h2>
+                                <p style="color: black; background-color: rgba(150, 150, 150, 0.507); padding: 2%; margin-right: 20%; border-radius: 20px;">{{ post.parrafo }} </p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

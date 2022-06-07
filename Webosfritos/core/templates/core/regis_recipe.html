@@ -3,40 +3,36 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-        <div class="card-header" style="width: 100%;">
-            <h2>Crea tu maravillosa receta!</h2>
+<div class="container">
+    <form action="{% url "crear" %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="" class="text-white">Que nombre tiene tu receta?</label>
+            <input class="form-control"
+                type="text"
+                required autofocus
+                name="titulo">
         </div>
-        <div>
-            <p style="color:aliceblue">{{ error }}</p>
+        <div class="form-group">
+            <label for="" class="text-white">Imagen de referencia</label>
+            <input class="input form-control"
+            type="file"
+            placeholder="Imagen"
+            required
+            name="imagen">
         </div>
-        <div class="container">
-            <form action="{% url "crear" %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="" class="text-white">Que nombre tiene tu receta?</label>
-                    <input class="form-control"
-                        type="text"
-                        required autofocus
-                        name="titulo">
-                </div>
-                <div class="form-group">
-                    <label for="" class="text-white">Imagen de referencia</label>
-                    <input class="input form-control"
-                    type="file"
-                    placeholder="Imagen"
-                    required
-                    name="imagen">
-                </div>
-                <div class="form-group">
-                    <label for="" class="text-white">Cuales son los pasos a seguir?</label>
-                    <input type="text" class="form-control" placeholder="Describe tu receta" name="receta">
-                </div>
+        <div class="form-group">
+            <label for="" class="text-white">Cuales son los pasos a seguir?</label>
+            <input type="textfield" class="form-control" placeholder="Describe tu receta" name="receta">
+        </div>
 
-                <div class="btn__form">
-                    <input class="btn btn-success" type="submit" value="Crear">
-                </div>
-    
-            </form>
+        <div class="btn__form">
+            <input class="btn btn-success" type="submit" value="Crear">
         </div>
+
+    </form>
+</div>
+ 
 
 {% endblock content %}
+

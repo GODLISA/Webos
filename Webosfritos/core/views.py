@@ -1,9 +1,12 @@
+from distutils.log import Log
 from pickletools import read_uint1
 import re
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import views as auth_login
-from .models import Receta, Usuario
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import (ListView, DetailView, UpdateView, DeleteView)
+from .models import Receta
 from .forms import UserRegisterForm
 from django.contrib import messages
 from Webosfritos.settings import BASE_DIR
@@ -15,7 +18,6 @@ def login_view(request):
     return render(request, 'core/iniciarsesion.html')
 
 def recetas_view(request):
-    print(Receta.objects.all())
     return render(request, 'core/regis_recipe.html')
 
 def crearReceta(request):
@@ -38,11 +40,11 @@ def mostrar_mis_recetas(request):
 
     try:
         usuario = User.objects.get(pk=user.id)
-        print("usuario %s" % usuario.is_staff)
+
         if usuario.is_staff:
             recetas = Receta.objects.all()
         else:
-            recetas = Receta.objects.filter(usuario=usuario)
+            recetas = Receta.objects.filter(usuario=usuario).order_by('-idreceta')
     except:
         recetas = ''
 
@@ -53,7 +55,7 @@ def mostrar_mis_recetas(request):
         'recetas': recetas,
         'user': user
     }
-    return render(request, 'core/mis_recetas.html', context=context)
+    return render(request, 'core/my_post.html', context=context)
 
 def register(request):
     if request.method == 'POST':
@@ -69,8 +71,21 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'core/registrarse.html', {'form': form})
 
-def verPost(request, pk):
-    titulo = titulo.user
-    usuario = User.objects.get(pk=user.id)
-    post = Receta.objects.filter(usuario = usuario)
-    return render(request, 'core/receta.html', {'receta': post})
+
+class PostDetailView(DetailView):
+    model = Receta
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = Receta
+    fields = ['titulo', 'imagen', 'parrafo']
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Receta
+    success_url = '/'
+
+    def form_valid(self, form):
+        return super().form_valid(form)

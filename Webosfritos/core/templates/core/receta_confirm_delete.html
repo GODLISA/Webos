@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/post.css' %}">
+
+    <div class="container">
+        <div class="col-md-12 col-lg-12">
+            <h1>Estas seguro de eliminar esta receta? {{ object.titulo }}</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <article class="post vt-post">
+                    <div class="row">
+                    </div>
+                    <div class="d-flex justify-content-end" style="margin: 30px;">
+                        <a href="{% url 'post-detail' object.pk %}"><button class="btn btn-success">Cancelar</button></a>
+                        <button class="btn btn-warning" type="submit">Si, estoy seguro</button>
+                    </div>
+                </article>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock content %}
