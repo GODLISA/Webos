@@ -1,4 +1,4 @@
-{% extends 'core/base.html' %}
+{% extends "core/base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
@@ -7,12 +7,13 @@
     <div class="container">
         {% for object in recetas %}
         <div class="" style="color:white">
+            <blockquote>Autor de la receta {{ object.usuario }}</blockquote>
             <div class="">
-                <h5 class="card-title">{{ object.title }}</h5>
-                <p class="card-text">{{ object.parrafo }}</p>
+                <h5 class="card-title text-white">Titulo{{ object.titulo }}</h5>
+                <h5 class="card-text text-white">{{ object.parrafo }}</h5>
 
             </div>
-            <img src="{{ object.imagen.url }}" alt="">
+            <img src="{{ object.get_imagen_url }}"  width="500px"  alt="">
         </div>
         {% endfor %}
     </div>

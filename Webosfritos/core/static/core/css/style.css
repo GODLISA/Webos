@@ -86,14 +86,7 @@ li{
     padding:  14px 20px;
     width: 61%;
 }
-.search-form form input{
-    float: right;
-    padding: 6px;
-    border: none;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 17px;
-}
+
 .search {
     width: 100%;
     position: relative;
@@ -157,23 +150,10 @@ li{
     color: #2094f3;
 }
 
-form {
-    background: white;
-    padding: 40px 10px;
-    box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    margin-top: 80%;
-}
 
-.form {
-    width: 100%;
-    margin: auto;
-}
 
-form .grupo {
-    position: relative;
-    margin: 45px;
-}
+
+
 
 input {
     background: none;
@@ -253,11 +233,7 @@ button {
     cursor: pointer;
 }
 
-@media screen and(max-width:500px) {
-    form {
-        width: 80%;
-    }
-}
+
 @media only screen and (max-width: 1200px){
     .menu,.menu-control,.featuradas{
         padding: 16px;

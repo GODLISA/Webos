@@ -25,3 +25,10 @@ class Receta(models.Model):
 
     def __str__(self):
         return '{} - {}'.format(self.titulo, self.usuario)
+
+    @property
+    def get_imagen_url(self):
+        if self.imagen and hasattr(self.imagen, 'url'):
+            return self.imagen.url
+        else:
+            return ""

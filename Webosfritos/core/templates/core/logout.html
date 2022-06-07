@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'core/css/style2.css' %}">
+    <h2 class="text-white">Has cerrado tu sesion</h2>
+    <div class="border-top pt-3">
+        <h3 >
+            <a class="text-purple" href="{% url 'mostrarInicio' %}">Volver a entrar</a>
+        </h3>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+{% endblock content %}

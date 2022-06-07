@@ -1,27 +1,22 @@
 from django.urls import path
 from . import views
-from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('', views.index, name="home"),
-        # INICIO
 
-    # REGISTRO
-    path('registro', views.registro_view, name="mostrarRegistro"),
-    path('registro/registrar', views.registrarUser, name="registrarUser"),
-
-    # LOGIN
-
-    path('login/', views.login_view, name="mostrarInicio"),
-    path('login/iniciarSesion', views.iniciarSesion, name="iniciarSesion"),
-
-    #Recetas
-    
+    path('registro', views.register, name="registro"),
+    path('logout/', auth_views.LogoutView.as_view(template_name='core/logout.html'), name='logout'),
+    path('login/', auth_views.LoginView.as_view(
+        template_name='core/iniciarsesion.html'),
+        name="mostrarInicio"
+    ),
     path('crear_receta/', views.recetas_view, name='crear_receta'),
     path('crear_receta/go', views.crearReceta, name='crear'),
     path('mis_recetas/', views.mostrar_mis_recetas, name='mis_recetas'),
 
     # logout
-    path('logout/', views.logout, name='logout')
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

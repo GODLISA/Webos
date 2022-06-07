@@ -3,6 +3,29 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Div, Field, Layout, Row, Submit
 from .models import Usuario, Receta
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
+
+class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                Row(
+                    Column('username', css_class="col-md-12"),
+                    Column('email', css_class="col-md-12"),
+                    Column('password1', css_class="col-md-12"),
+                    Column('password2', css_class="col-md-12")
+                )
+            )
+        )
 
 class RecipeFormClass(forms.ModelForm):
     class Meta:
