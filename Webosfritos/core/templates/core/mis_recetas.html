@@ -2,20 +2,24 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <p>Estimado {{user}}, estas son tus recetas</p>
+<link rel="stylesheet" type="text/css" href="{% static 'core/css/style.css' %}">
 
-    <div class="container">
+    <h1 style="color: white;" class="centrar">Estimado {{user}}, estas son tus recetas</h1>
+
+    <div class="container centrar "> 
         {% for object in recetas %}
         <div class="" style="color:white">
-            <blockquote>Autor de la receta {{ object.usuario }}</blockquote>
             <div class="">
-                <h5 class="card-title text-white">Titulo{{ object.titulo }}</h5>
-                <h5 class="card-text text-white">{{ object.parrafo }}</h5>
-
+                <ul class="feature">
+                <li><h1 class="card-title text-white">Titulo: {{ object.titulo }}</h1></li>
+                <li><blockquote>Autor de la receta: {{ object.usuario }}</blockquote></li>
+                <li><p class="card-text text-white">{{ object.parrafo }}</p></li>
+                <li><img class="imagen" src="{{ object.get_imagen_url }}"  width="500px"  alt=""></li>
+                </ul>
             </div>
-            <img src="{{ object.get_imagen_url }}"  width="500px"  alt="">
-            <a class="btn btn-sm btn-info" href="{% url 'updateReceta' %}">Editar</a>
+            
         </div>
         {% endfor %}
+        
     </div>
 {% endblock content %}
