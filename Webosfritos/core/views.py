@@ -89,3 +89,21 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
     def form_valid(self, form):
         return super().form_valid(form)
+
+def mostrar_recetas_index(request):
+
+    user = request.user
+
+    try:
+        recetas = Receta.objects.all()
+    except:
+        recetas = ''
+
+    if user is None:
+        user = 'Guest'
+
+    context = {
+        'recetas': recetas,
+        'user': user
+    }
+    return render(request, 'core/index.html', context=context)

@@ -18,6 +18,7 @@ urlpatterns = [
     path('crear_receta/', views.recetas_view, name='crear_receta'),
     path('crear_receta/go', views.crearReceta, name='crear'),
 
+    path('mostrar_index/', views.mostrar_recetas_index, name="index"),
     path('mis_recetas/', views.mostrar_mis_recetas, name='mis_recetas'),
     path('receta/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('receta/edit/<int:pk>/', PostUpdateView.as_view(), name='post-update'),
