@@ -23,8 +23,11 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end" style="margin: 30px;">
-                    <a href="{% url 'post-update' receta.pk %}"><button class="btn btn-success">Editar</button></a>
-                    <a href="{% url 'post-delete' receta.pk %}"><button class="btn btn-warning">Eliminar</button></a>
+                    {% if user == receta.usuario or user.is_staff %}
+                    <a href="{% url 'post-update' receta.pk %}"><button class="btn btn-success" style="margin: 10px;">Editar</button></a>
+                    
+                    <a href="{% url 'post-delete' receta.pk %}"><button class="btn btn-warning" style="margin: 10px;">Eliminar</button></a>
+                    {% endif %}
                 </div>
             </article>
 

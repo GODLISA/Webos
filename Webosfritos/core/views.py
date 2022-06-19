@@ -12,24 +12,43 @@ from django.contrib import messages
 from Webosfritos.settings import BASE_DIR
 # Create your views here.
 def index(request):
-    return render(request, 'core/index.html')
+    user = request.user
+
+    try:
+        recetas = Receta.objects.all()
+    except:
+        recetas = ''
+
+    if user is None:
+        user = 'Guest'
+
+    context = {
+        'recetas': recetas,
+        'user': user
+    }
+    return render(request, 'core/index.html', context)
 
 def login_view(request):
     return render(request, 'core/iniciarsesion.html')
 
 def recetas_view(request):
-    return render(request, 'core/regis_recipe.html')
+
+    if request.user.is_authenticated:
+        return render(request, 'core/regis_recipe.html')
+    else:
+        return redirect('registro')
 
 def crearReceta(request):
     titulo = request.POST.get('titulo', '')
     imagen = request.FILES.get('imagen', '') 
     receta = request.POST.get('receta', '')
     user = request.user
+
     try:
         usuario = User.objects.get(pk=user.id)
         receta = Receta(titulo=titulo, imagen=imagen, parrafo=receta, usuario=usuario)
         receta.save()
-        return redirect('crear_receta')
+        return redirect('register')
     except:
         context = {'error': 'No se pudo crear receta, debes tener tu sesion iniciada'}
         return render(request, 'core/regis_recipe.html', context=context)
@@ -66,7 +85,8 @@ def register(request):
             messages.success(request, f'Felicidades {username}, ahora eres uno de nosotros!')
             return redirect('home')
         else:
-            print(form.errors)
+
+            return render(request, 'core/registrarse.html', {"Mensaje": True, 'form': form})
     else:
         form = UserRegisterForm()
     return render(request, 'core/registrarse.html', {'form': form})
@@ -90,20 +110,3 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     def form_valid(self, form):
         return super().form_valid(form)
 
-def mostrar_recetas_index(request):
-
-    user = request.user
-
-    try:
-        recetas = Receta.objects.all()
-    except:
-        recetas = ''
-
-    if user is None:
-        user = 'Guest'
-
-    context = {
-        'recetas': recetas,
-        'user': user
-    }
-    return render(request, 'core/index.html', context=context)

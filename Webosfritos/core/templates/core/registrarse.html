@@ -4,6 +4,14 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'core/css/style2.css' %}">
     <div class="content-section contenedorxs">
+
+        
+        {% if Mensaje %}
+
+            <div class="alert alert-danger" role="alert">
+                Ya existe un usuario con este nombre.
+            </div>
+        {% endif %}
         <form method="POST" class="form__reg">
             {% csrf_token %}
             <fieldset class="form-group">
@@ -44,6 +52,8 @@
         $('#id_password2').removeClass('textinput')
 
         $('#etiqueta0').text("Nombre de usuario").addClass('text-white')
-        $('#etiqueta1').text("Contraseña").addClass('text-white')
+        $('#etiqueta1').text("Correo").addClass('text-white')
+        $('#etiqueta2').text("Contraseña").addClass('text-white')
+        $('#etiqueta3').text("Repetir Contraseña").addClass('text-white')
     </script>
 {% endblock content %}
