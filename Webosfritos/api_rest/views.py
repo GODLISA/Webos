@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import RecetaSerializer
+from .serializers import RecetaSerializer, UsuarioSerializer
 from core.models import Receta, Usuario
 
 from django.shortcuts import render
@@ -72,3 +72,57 @@ def modElimReceta(request,codigo):
 class RecetaViewset(viewsets.ModelViewSet):
     queryset = Receta.objects.all()
     serializer_class = RecetaSerializer
+
+@csrf_exempt
+@api_view(['GET','POST'])
+@permission_classes((IsAuthenticated,))
+def listas_usuario(request):
+    if request.method == 'GET':
+        usuarios = Usuario.objects.all()
+        serializer = UsuarioSerializer(usuarios,many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = UsuarioSerializer(data = data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def agregar_usuario(request):
+    data = JSONParser().parse(request)
+    serializer = UsuarioSerializer(data = data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status = status.HTTP_201_CREATED)
+    else:
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET','PUT','DELETE'])
+@permission_classes((IsAuthenticated,))
+def modElimUsuario(request,codigo):
+    try:
+        m = Usuario.objects.get(id = codigo)
+    except Usuario.DoesNotExist:
+        return Response(status = status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        serializer = UsuarioSerializer(m)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = UsuarioSerializer(m,data = data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        
+    elif request.method == 'DELETE':
+        m.delete()
+        return Response(status = status.HTTP_204_NO_CONTENT)
