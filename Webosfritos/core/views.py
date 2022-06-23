@@ -10,7 +10,15 @@ from .models import Receta
 from .forms import UserRegisterForm
 from django.contrib import messages
 from Webosfritos.settings import BASE_DIR
+from rest_framework import viewsets
+from .serializers import RecetaSerializer
 # Create your views here.
+
+
+class RecetaViewset(viewsets.ModelViewSet):
+    queryset = Receta.objects.all()
+    serializer_class = RecetaSerializer
+    
 def index(request):
     user = request.user
 
