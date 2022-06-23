@@ -3,11 +3,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import PostDetailView, PostUpdateView, PostDeleteView, RecetaViewset
-from rest_framework import routers
-
-router = routers.DefaultRouter()
-router.register('receta', RecetaViewset)
+from .views import PostDetailView, PostUpdateView, PostDeleteView
 
 urlpatterns = [
     path('', views.index, name="home"),
@@ -26,6 +22,5 @@ urlpatterns = [
     path('receta/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('receta/edit/<int:pk>/', PostUpdateView.as_view(), name='post-update'),
     path('receta/delete/<int:pk>/', PostDeleteView.as_view(), name='post-delete'),
-    path('api/', include(router.urls)),
     # logout
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
